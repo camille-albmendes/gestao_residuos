@@ -4,13 +4,13 @@ import br.com.fiap.collectage.model.Coleta;
 
 import java.util.Date;
 
-public record ColetaDTO(
+public record ColetaExibicaoDTO(
         Long id,
         Date data,
         Coleta.TipoResiduo tipoResiduo,
         boolean concluida
 ) {
-    public ColetaDTO(Coleta coleta) {
+    public ColetaExibicaoDTO(Coleta coleta) {
         this(
             coleta.getId(),
             coleta.getData(),

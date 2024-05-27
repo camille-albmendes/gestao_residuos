@@ -2,12 +2,12 @@ package br.com.fiap.collectage.dto;
 
 import br.com.fiap.collectage.model.Usuario;
 
-public record UsuarioDTO(
+public record UsuarioExibicaoDTO(
         Long id,
         String nome,
         String email) {
 
-    public UsuarioDTO(Usuario usuario) {
+    public UsuarioExibicaoDTO(Usuario usuario) {
         this(
             usuario.getId(),
             usuario.getNome(),

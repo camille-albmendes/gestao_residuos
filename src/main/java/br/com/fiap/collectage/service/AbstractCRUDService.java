@@ -15,8 +15,8 @@ public abstract class AbstractCRUDService<T extends DBEntity> {
         this.clazz = clazz;
         this.repository = repository;
     }
-    
-    public T salvar(T t){
+
+    protected T salvarModel(T t){
         return repository.save(t);
     }
 

@@ -2,14 +2,14 @@ package br.com.fiap.collectage.dto;
 
 import br.com.fiap.collectage.model.Logradouro;
 
-public record LogradouroDTO(
+public record LogradouroExibicaoDTO(
     Long id,
     String nome,
     String cidade,
     String estado,
     String cep
 ) {
-    public LogradouroDTO(Logradouro logradouro) {
+    public LogradouroExibicaoDTO(Logradouro logradouro) {
         this(
             logradouro.getId(),
             logradouro.getNome(),

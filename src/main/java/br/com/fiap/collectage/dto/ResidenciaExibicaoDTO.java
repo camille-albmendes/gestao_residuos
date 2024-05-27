@@ -4,15 +4,15 @@ import br.com.fiap.collectage.model.Residencia;
 
 import java.util.Date;
 
-public record ResidenciaDTO(
+public record ResidenciaExibicaoDTO(
     Long id,
-    LogradouroDTO logradouro,
+    LogradouroExibicaoDTO logradouro,
     Date dataUltimaColeta
 ) {
-    public ResidenciaDTO(Residencia residencia) {
+    public ResidenciaExibicaoDTO(Residencia residencia) {
         this(
             residencia.getId(),
-            new LogradouroDTO(residencia.getLogradouro()),
+            new LogradouroExibicaoDTO(residencia.getLogradouro()),
             residencia.getDataUltimaColeta()
         );
     }

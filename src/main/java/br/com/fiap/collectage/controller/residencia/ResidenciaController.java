@@ -1,7 +1,8 @@
 package br.com.fiap.collectage.controller.residencia;
 
 import br.com.fiap.collectage.controller.URLs;
-import br.com.fiap.collectage.dto.ResidenciaDTO;
+import br.com.fiap.collectage.dto.ResidenciaCadastroDTO;
+import br.com.fiap.collectage.dto.ResidenciaExibicaoDTO;
 import br.com.fiap.collectage.model.Residencia;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.ResidenciaService;
@@ -20,18 +21,18 @@ public class ResidenciaController {
 
     @PostMapping(URLs.RESIDENCIAS)
     @ResponseStatus(HttpStatus.CREATED)
-    public Residencia salvar(@RequestBody Residencia residencia){
-        return residenciaService.salvar(residencia);
+    public ResidenciaExibicaoDTO salvar(@RequestBody ResidenciaCadastroDTO residenciaCadastroDTO){
+        return residenciaService.salvar(residenciaCadastroDTO);
     }
 
     @GetMapping(URLs.RESIDENCIAS)
     @ResponseStatus(HttpStatus.OK)
-    public List<ResidenciaDTO> listarTodos(){
+    public List<ResidenciaExibicaoDTO> listarTodos(){
         return residenciaService.listarTodos();
     }
 
     @GetMapping(URLs.RESIDENCIA)
-    public ResponseEntity<ResidenciaDTO> buscarPorId(@PathVariable Long residenciaId){
+    public ResponseEntity<ResidenciaExibicaoDTO> buscarPorId(@PathVariable Long residenciaId){
         try {
             return ResponseEntity.ok(residenciaService.buscarPorId(residenciaId));
         } catch (RecursoNaoEncontradoException e) {

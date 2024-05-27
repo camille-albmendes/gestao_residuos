@@ -1,9 +1,13 @@
 package br.com.fiap.collectage.service;
 
-import br.com.fiap.collectage.dto.ResidenciaDTO;
+import br.com.fiap.collectage.dto.LogradouroExibicaoDTO;
+import br.com.fiap.collectage.dto.ResidenciaCadastroDTO;
+import br.com.fiap.collectage.dto.ResidenciaExibicaoDTO;
+import br.com.fiap.collectage.model.Logradouro;
 import br.com.fiap.collectage.model.Residencia;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.repository.ResidenciaRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,14 +18,20 @@ public class ResidenciaService  extends AbstractCRUDService<Residencia> {
         super(Residencia.class, residenciaRepository);
     }
 
-    public ResidenciaDTO buscarPorId(Long id) throws RecursoNaoEncontradoException {
-        return new ResidenciaDTO(super.buscarModelPorId(id));
+    public ResidenciaExibicaoDTO buscarPorId(Long id) throws RecursoNaoEncontradoException {
+        return new ResidenciaExibicaoDTO(super.buscarModelPorId(id));
     }
 
-    public List<ResidenciaDTO> listarTodos() {
+    public List<ResidenciaExibicaoDTO> listarTodos() {
         return super.listarTodosModel()
                 .stream()
-                .map(ResidenciaDTO::new)
+                .map(ResidenciaExibicaoDTO::new)
                 .toList();
+    }
+
+    public ResidenciaExibicaoDTO salvar(ResidenciaCadastroDTO residenciaCadastroDTO){
+        Residencia residencia = new Residencia();
+        BeanUtils.copyProperties(residenciaCadastroDTO, residencia);
+        return new ResidenciaExibicaoDTO(super.salvarModel(residencia));
     }
 }

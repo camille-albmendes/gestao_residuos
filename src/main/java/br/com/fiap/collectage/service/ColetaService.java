@@ -1,9 +1,11 @@
 package br.com.fiap.collectage.service;
 
-import br.com.fiap.collectage.dto.ColetaDTO;
+import br.com.fiap.collectage.dto.ColetaCadastroDTO;
+import br.com.fiap.collectage.dto.ColetaExibicaoDTO;
 import br.com.fiap.collectage.model.Coleta;
 import br.com.fiap.collectage.repository.ColetaRepository;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,14 +16,20 @@ public class ColetaService extends AbstractCRUDService<Coleta> {
         super(Coleta.class, coletaRepository);
     }
 
-    public ColetaDTO buscarPorId(Long id) throws RecursoNaoEncontradoException {
-        return new ColetaDTO(super.buscarModelPorId(id));
+    public ColetaExibicaoDTO buscarPorId(Long id) throws RecursoNaoEncontradoException {
+        return new ColetaExibicaoDTO(super.buscarModelPorId(id));
     }
 
-    public List<ColetaDTO> listarTodos() {
+    public List<ColetaExibicaoDTO> listarTodos() {
         return super.listarTodosModel()
                 .stream()
-                .map(ColetaDTO::new)
+                .map(ColetaExibicaoDTO::new)
                 .toList();
+    }
+
+    public ColetaExibicaoDTO salvar(ColetaCadastroDTO coletaCadastroDTO){
+        Coleta coleta = new Coleta();
+        BeanUtils.copyProperties(coletaCadastroDTO, coleta);
+        return new ColetaExibicaoDTO(super.salvarModel(coleta));
     }
 }
