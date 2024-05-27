@@ -1,9 +1,12 @@
 package br.com.fiap.collectage.controller.coleta;
 
 import br.com.fiap.collectage.controller.URLs;
+import br.com.fiap.collectage.dto.ColetaCadastroDTO;
+import br.com.fiap.collectage.dto.ColetaExibicaoDTO;
 import br.com.fiap.collectage.model.Coleta;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.ColetaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +21,18 @@ public class ColetaController {
 
     @PostMapping(URLs.COLETAS)
     @ResponseStatus(HttpStatus.CREATED)
-    public Coleta salvar(@RequestBody Coleta coleta){
-        return coletaService.salvar(coleta);
+    public ColetaExibicaoDTO salvar(@Valid @RequestBody ColetaCadastroDTO coletaCadastroDTO){
+        return coletaService.salvar(coletaCadastroDTO);
     }
 
     @GetMapping(URLs.COLETAS)
     @ResponseStatus(HttpStatus.OK)
-    public List<Coleta> listarTodos(){
+    public List<ColetaExibicaoDTO> listarTodos(){
         return coletaService.listarTodos();
     }
 
     @GetMapping(URLs.COLETA)
-    public ResponseEntity<Coleta> buscarPorId(@PathVariable Long coletaId){
+    public ResponseEntity<ColetaExibicaoDTO> buscarPorId(@PathVariable Long coletaId){
         try {
             return ResponseEntity.ok(coletaService.buscarPorId(coletaId));
         } catch (RecursoNaoEncontradoException e) {

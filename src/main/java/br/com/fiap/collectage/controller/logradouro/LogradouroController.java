@@ -1,9 +1,12 @@
 package br.com.fiap.collectage.controller.logradouro;
 
 import br.com.fiap.collectage.controller.URLs;
+import br.com.fiap.collectage.dto.LogradouroCadastroDTO;
+import br.com.fiap.collectage.dto.LogradouroExibicaoDTO;
 import br.com.fiap.collectage.model.Logradouro;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.LogradouroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,18 +22,18 @@ public class LogradouroController {
 
     @PostMapping(URLs.LOGRADOUROS)
     @ResponseStatus(HttpStatus.CREATED)
-    public Logradouro salvar(@RequestBody Logradouro logradouro){
-        return logradouroService.salvar(logradouro);
+    public LogradouroExibicaoDTO salvar(@Valid @RequestBody LogradouroCadastroDTO logradouroCadastroDTO){
+        return logradouroService.salvar(logradouroCadastroDTO);
     }
 
     @GetMapping(URLs.LOGRADOUROS)
     @ResponseStatus(HttpStatus.OK)
-    public List<Logradouro> listarTodos(){
+    public List<LogradouroExibicaoDTO> listarTodos(){
         return logradouroService.listarTodos();
     }
 
     @GetMapping(URLs.LOGRADOURO)
-    public ResponseEntity<Logradouro> buscarPorId(@PathVariable Long logradouroId){
+    public ResponseEntity<LogradouroExibicaoDTO> buscarPorId(@PathVariable Long logradouroId){
         try {
             return ResponseEntity.ok(logradouroService.buscarPorId(logradouroId));
         } catch (RecursoNaoEncontradoException e) {
