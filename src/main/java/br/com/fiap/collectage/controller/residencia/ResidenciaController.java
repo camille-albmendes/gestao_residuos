@@ -27,13 +27,13 @@ public class ResidenciaController {
     @GetMapping(URLs.RESIDENCIAS)
     @ResponseStatus(HttpStatus.OK)
     public List<ResidenciaDTO> listarTodos(){
-        return residenciaService.listarTodosDTO();
+        return residenciaService.listarTodos();
     }
 
     @GetMapping(URLs.RESIDENCIA)
     public ResponseEntity<ResidenciaDTO> buscarPorId(@PathVariable Long residenciaId){
         try {
-            return ResponseEntity.ok(residenciaService.buscarDTOPorId(residenciaId));
+            return ResponseEntity.ok(residenciaService.buscarPorId(residenciaId));
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.notFound().build();
         }

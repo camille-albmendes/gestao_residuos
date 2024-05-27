@@ -14,12 +14,12 @@ public class LogradouroService extends AbstractCRUDService<Logradouro> {
         super(Logradouro.class, logradouroRepository);
     }
 
-    public LogradouroDTO buscarDTOPorId(Long id) throws RecursoNaoEncontradoException {
-        return new LogradouroDTO(super.buscarPorId(id));
+    public LogradouroDTO buscarPorId(Long id) throws RecursoNaoEncontradoException {
+        return new LogradouroDTO(super.buscarModelPorId(id));
     }
 
-    public List<LogradouroDTO> listarTodosDTO() {
-        return super.listarTodos()
+    public List<LogradouroDTO> listarTodos() {
+        return super.listarTodosModel()
                 .stream()
                 .map(LogradouroDTO::new)
                 .toList();

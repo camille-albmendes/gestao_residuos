@@ -20,7 +20,7 @@ public abstract class AbstractCRUDService<T extends DBEntity> {
         return repository.save(t);
     }
 
-    public T buscarPorId(Long id) throws RecursoNaoEncontradoException {
+    protected T buscarModelPorId(Long id) throws RecursoNaoEncontradoException {
         Optional<T> coletaOptional = repository.findById(id);
 
         if (coletaOptional.isPresent()){
@@ -30,7 +30,7 @@ public abstract class AbstractCRUDService<T extends DBEntity> {
         }
     }
 
-    public List<T> listarTodos(){
+    protected List<T> listarTodosModel(){
         return repository.findAll();
     }
 

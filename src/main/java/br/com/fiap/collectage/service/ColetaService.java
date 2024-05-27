@@ -14,12 +14,12 @@ public class ColetaService extends AbstractCRUDService<Coleta> {
         super(Coleta.class, coletaRepository);
     }
 
-    public ColetaDTO buscarDTOPorId(Long id) throws RecursoNaoEncontradoException {
-        return new ColetaDTO(super.buscarPorId(id));
+    public ColetaDTO buscarPorId(Long id) throws RecursoNaoEncontradoException {
+        return new ColetaDTO(super.buscarModelPorId(id));
     }
 
-    public List<ColetaDTO> listarTodosDTO() {
-        return super.listarTodos()
+    public List<ColetaDTO> listarTodos() {
+        return super.listarTodosModel()
                 .stream()
                 .map(ColetaDTO::new)
                 .toList();

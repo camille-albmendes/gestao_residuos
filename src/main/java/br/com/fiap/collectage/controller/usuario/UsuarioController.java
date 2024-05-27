@@ -27,13 +27,13 @@ public class UsuarioController {
     @GetMapping(URLs.USUARIOS)
     @ResponseStatus(HttpStatus.OK)
     public List<UsuarioDTO> listarTodos(){
-        return usuarioService.listarTodosDTO();
+        return usuarioService.listarTodos();
     }
 
     @GetMapping(URLs.USUARIO)
     public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable Long usuarioId){
         try {
-            return ResponseEntity.ok(usuarioService.buscarDTOPorId(usuarioId));
+            return ResponseEntity.ok(usuarioService.buscarPorId(usuarioId));
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.notFound().build();
         }

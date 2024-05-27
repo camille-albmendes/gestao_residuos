@@ -27,13 +27,13 @@ public class LogradouroController {
     @GetMapping(URLs.LOGRADOUROS)
     @ResponseStatus(HttpStatus.OK)
     public List<LogradouroDTO> listarTodos(){
-        return logradouroService.listarTodosDTO();
+        return logradouroService.listarTodos();
     }
 
     @GetMapping(URLs.LOGRADOURO)
     public ResponseEntity<LogradouroDTO> buscarPorId(@PathVariable Long logradouroId){
         try {
-            return ResponseEntity.ok(logradouroService.buscarDTOPorId(logradouroId));
+            return ResponseEntity.ok(logradouroService.buscarPorId(logradouroId));
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.notFound().build();
         }

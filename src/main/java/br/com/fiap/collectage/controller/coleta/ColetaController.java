@@ -26,13 +26,13 @@ public class ColetaController {
     @GetMapping(URLs.COLETAS)
     @ResponseStatus(HttpStatus.OK)
     public List<ColetaDTO> listarTodos(){
-        return coletaService.listarTodosDTO();
+        return coletaService.listarTodos();
     }
 
     @GetMapping(URLs.COLETA)
     public ResponseEntity<ColetaDTO> buscarPorId(@PathVariable Long coletaId){
         try {
-            return ResponseEntity.ok(coletaService.buscarDTOPorId(coletaId));
+            return ResponseEntity.ok(coletaService.buscarPorId(coletaId));
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.notFound().build();
         }

@@ -14,12 +14,12 @@ public class ResidenciaService  extends AbstractCRUDService<Residencia> {
         super(Residencia.class, residenciaRepository);
     }
 
-    public ResidenciaDTO buscarDTOPorId(Long id) throws RecursoNaoEncontradoException {
-        return new ResidenciaDTO(super.buscarPorId(id));
+    public ResidenciaDTO buscarPorId(Long id) throws RecursoNaoEncontradoException {
+        return new ResidenciaDTO(super.buscarModelPorId(id));
     }
 
-    public List<ResidenciaDTO> listarTodosDTO() {
-        return super.listarTodos()
+    public List<ResidenciaDTO> listarTodos() {
+        return super.listarTodosModel()
                 .stream()
                 .map(ResidenciaDTO::new)
                 .toList();

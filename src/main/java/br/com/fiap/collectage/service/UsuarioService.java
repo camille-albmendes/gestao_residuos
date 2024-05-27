@@ -14,12 +14,12 @@ public class UsuarioService extends AbstractCRUDService<Usuario> {
         super(Usuario.class, usuarioRepository);
     }
 
-    public UsuarioDTO buscarDTOPorId(Long id) throws RecursoNaoEncontradoException {
-        return new UsuarioDTO(super.buscarPorId(id));
+    public UsuarioDTO buscarPorId(Long id) throws RecursoNaoEncontradoException {
+        return new UsuarioDTO(super.buscarModelPorId(id));
     }
 
-    public List<UsuarioDTO> listarTodosDTO() {
-        return super.listarTodos()
+    public List<UsuarioDTO> listarTodos() {
+        return super.listarTodosModel()
                 .stream()
                 .map(UsuarioDTO::new)
                 .toList();
