@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "tbl_usuarios")
+@Table(name = "TBL_USUARIOS")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Usuario {
+public class Usuario implements DBEntity {
 
     @Id
     @GeneratedValue(
@@ -20,16 +20,22 @@ public class Usuario {
     @SequenceGenerator(
             name = "SEQ_USUARIOS",
             sequenceName = "SEQ_USUARIOS",
-            allocationSize = 50
+            allocationSize = 1
     )
-    @Column(name = "usuario_id")
-    private Long usuarioId;
+    @Column(name = "USUARIO_ID")
+    private Long id;
 
+    @Column(name = "NOME")
     private String nome;
+
+    @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "SENHA")
     private String senha;
 
-    public Long getUsuarioId() {
-        return this.usuarioId;
+    @Override
+    public Long getId() {
+        return this.id;
     }
 }
