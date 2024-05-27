@@ -6,6 +6,7 @@ import br.com.fiap.collectage.dto.ColetaExibicaoDTO;
 import br.com.fiap.collectage.model.Coleta;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.ColetaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class ColetaController {
 
     @PostMapping(URLs.COLETAS)
     @ResponseStatus(HttpStatus.CREATED)
-    public ColetaExibicaoDTO salvar(@RequestBody ColetaCadastroDTO coletaCadastroDTO){
+    public ColetaExibicaoDTO salvar(@Valid @RequestBody ColetaCadastroDTO coletaCadastroDTO){
         return coletaService.salvar(coletaCadastroDTO);
     }
 

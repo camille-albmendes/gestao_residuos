@@ -6,6 +6,7 @@ import br.com.fiap.collectage.dto.ResidenciaExibicaoDTO;
 import br.com.fiap.collectage.model.Residencia;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.ResidenciaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class ResidenciaController {
 
     @PostMapping(URLs.RESIDENCIAS)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResidenciaExibicaoDTO salvar(@RequestBody ResidenciaCadastroDTO residenciaCadastroDTO){
+    public ResidenciaExibicaoDTO salvar(@Valid @RequestBody ResidenciaCadastroDTO residenciaCadastroDTO){
         return residenciaService.salvar(residenciaCadastroDTO);
     }
 

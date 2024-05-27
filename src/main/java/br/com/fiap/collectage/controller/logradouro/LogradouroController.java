@@ -6,6 +6,7 @@ import br.com.fiap.collectage.dto.LogradouroExibicaoDTO;
 import br.com.fiap.collectage.model.Logradouro;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.LogradouroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class LogradouroController {
 
     @PostMapping(URLs.LOGRADOUROS)
     @ResponseStatus(HttpStatus.CREATED)
-    public LogradouroExibicaoDTO salvar(@RequestBody LogradouroCadastroDTO logradouroCadastroDTO){
+    public LogradouroExibicaoDTO salvar(@Valid @RequestBody LogradouroCadastroDTO logradouroCadastroDTO){
         return logradouroService.salvar(logradouroCadastroDTO);
     }
 

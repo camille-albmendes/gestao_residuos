@@ -1,11 +1,10 @@
 package br.com.fiap.collectage.dto;
 
 import br.com.fiap.collectage.model.Logradouro;
-
-import java.util.Date;
+import jakarta.validation.constraints.NotNull;
 
 public record ResidenciaCadastroDTO(
-    Logradouro logradouro,
-    Date dataUltimaColeta
+    @NotNull(message = "O logradouro da residência é obrigatório")
+    Logradouro logradouro
 ) {
 }

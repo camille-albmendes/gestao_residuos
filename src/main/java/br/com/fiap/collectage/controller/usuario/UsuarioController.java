@@ -6,6 +6,7 @@ import br.com.fiap.collectage.dto.UsuarioExibicaoDTO;
 import br.com.fiap.collectage.model.Usuario;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UsuarioController {
 
     @PostMapping(URLs.USUARIOS)
     @ResponseStatus(HttpStatus.CREATED)
-    public UsuarioExibicaoDTO salvar(@RequestBody UsuarioCadastroDTO usuarioCadastroDTO){
+    public UsuarioExibicaoDTO salvar(@Valid @RequestBody UsuarioCadastroDTO usuarioCadastroDTO){
         return usuarioService.salvar(usuarioCadastroDTO);
     }
 
