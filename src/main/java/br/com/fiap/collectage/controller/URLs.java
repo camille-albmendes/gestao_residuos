@@ -8,4 +8,7 @@ public class URLs {
 
     public static final String COLETA = "/api/coletas/{coletaId}";
     public static final String COLETAS = "/api/coletas";
+
+    public static final String LOGRADOURO = "/api/logradouros/{logradouroId}";
+    public static final String LOGRADOUROS = "/api/logradouros";
 }
