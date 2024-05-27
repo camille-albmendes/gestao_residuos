@@ -39,4 +39,24 @@ public class Residencia implements DBEntity {
     public Long getId() {
         return this.id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Logradouro getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(Logradouro logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public Date getDataUltimaColeta() {
+        return dataUltimaColeta;
+    }
+
+    public void setDataUltimaColeta(Date dataUltimaColeta) {
+        this.dataUltimaColeta = dataUltimaColeta;
+    }
 }
