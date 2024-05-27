@@ -1,73 +1,44 @@
-import javax.persistence.*;
+package br.com.fiap.collectage.model;
+
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Table(name = "T_LOGRADOUROS")
-public class Logradouro {
+@Table(name = "TBL_LOGRADOUROS")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+public class Logradouro implements DBEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cod_id")
-    private int id;
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_LOGRADOUROS"
+    )
+    @SequenceGenerator(
+            name = "SEQ_LOGRADOUROS",
+            sequenceName = "SEQ_LOGRADOUROS",
+            allocationSize = 1
+    )
+    @Column(name = "COD_ID")
+    private Long id;
 
-    @Column(name = "nom_nome")
+    @Column(name = "NOM_NOME")
     private String nome;
 
-    @Column(name = "txt_cidade")
+    @Column(name = "TXT_CIDADE")
     private String cidade;
 
-    @Column(name = "txt_estado")
+    @Column(name = "TXT_ESTADO")
     private String estado;
 
-    @Column(name = "txt_cep")
+    @Column(name = "TXT_CEP")
     private String cep;
 
-    // Getter para o id
-    public int getId() {
-        return id;
-    }
-
-    // Setter para o id
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    // Getter para o nome
-    public String getNome() {
-        return nome;
-    }
-
-    // Setter para o nome
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    // Getter para a cidade
-    public String getCidade() {
-        return cidade;
-    }
-
-    // Setter para a cidade
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    // Getter para o estado
-    public String getEstado() {
-        return estado;
-    }
-
-    // Setter para o estado
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    // Getter para o cep
-    public String getCep() {
-        return cep;
-    }
-
-    // Setter para o cep
-    public void setCep(String cep) {
-        this.cep = cep;
+    @Override
+    public Long getId() {
+        return this.id;
     }
 }
