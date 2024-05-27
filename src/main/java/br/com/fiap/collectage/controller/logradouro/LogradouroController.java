@@ -1,6 +1,7 @@
 package br.com.fiap.collectage.controller.logradouro;
 
 import br.com.fiap.collectage.controller.URLs;
+import br.com.fiap.collectage.dto.LogradouroDTO;
 import br.com.fiap.collectage.model.Logradouro;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.LogradouroService;
@@ -25,14 +26,14 @@ public class LogradouroController {
 
     @GetMapping(URLs.LOGRADOUROS)
     @ResponseStatus(HttpStatus.OK)
-    public List<Logradouro> listarTodos(){
-        return logradouroService.listarTodos();
+    public List<LogradouroDTO> listarTodos(){
+        return logradouroService.listarTodosDTO();
     }
 
     @GetMapping(URLs.LOGRADOURO)
-    public ResponseEntity<Logradouro> buscarPorId(@PathVariable Long logradouroId){
+    public ResponseEntity<LogradouroDTO> buscarPorId(@PathVariable Long logradouroId){
         try {
-            return ResponseEntity.ok(logradouroService.buscarPorId(logradouroId));
+            return ResponseEntity.ok(logradouroService.buscarDTOPorId(logradouroId));
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.notFound().build();
         }

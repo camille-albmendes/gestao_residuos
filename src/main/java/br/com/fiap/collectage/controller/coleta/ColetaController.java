@@ -1,6 +1,7 @@
 package br.com.fiap.collectage.controller.coleta;
 
 import br.com.fiap.collectage.controller.URLs;
+import br.com.fiap.collectage.dto.ColetaDTO;
 import br.com.fiap.collectage.model.Coleta;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.ColetaService;
@@ -24,14 +25,14 @@ public class ColetaController {
 
     @GetMapping(URLs.COLETAS)
     @ResponseStatus(HttpStatus.OK)
-    public List<Coleta> listarTodos(){
-        return coletaService.listarTodos();
+    public List<ColetaDTO> listarTodos(){
+        return coletaService.listarTodosDTO();
     }
 
     @GetMapping(URLs.COLETA)
-    public ResponseEntity<Coleta> buscarPorId(@PathVariable Long coletaId){
+    public ResponseEntity<ColetaDTO> buscarPorId(@PathVariable Long coletaId){
         try {
-            return ResponseEntity.ok(coletaService.buscarPorId(coletaId));
+            return ResponseEntity.ok(coletaService.buscarDTOPorId(coletaId));
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.notFound().build();
         }

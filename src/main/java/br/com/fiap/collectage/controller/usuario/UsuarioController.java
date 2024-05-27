@@ -1,6 +1,7 @@
 package br.com.fiap.collectage.controller.usuario;
 
 import br.com.fiap.collectage.controller.URLs;
+import br.com.fiap.collectage.dto.UsuarioDTO;
 import br.com.fiap.collectage.model.Usuario;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.UsuarioService;
@@ -25,14 +26,14 @@ public class UsuarioController {
 
     @GetMapping(URLs.USUARIOS)
     @ResponseStatus(HttpStatus.OK)
-    public List<Usuario> listarTodos(){
-        return usuarioService.listarTodos();
+    public List<UsuarioDTO> listarTodos(){
+        return usuarioService.listarTodosDTO();
     }
 
     @GetMapping(URLs.USUARIO)
-    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long usuarioId){
+    public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable Long usuarioId){
         try {
-            return ResponseEntity.ok(usuarioService.buscarPorId(usuarioId));
+            return ResponseEntity.ok(usuarioService.buscarDTOPorId(usuarioId));
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.notFound().build();
         }

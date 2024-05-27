@@ -1,6 +1,7 @@
 package br.com.fiap.collectage.controller.residencia;
 
 import br.com.fiap.collectage.controller.URLs;
+import br.com.fiap.collectage.dto.ResidenciaDTO;
 import br.com.fiap.collectage.model.Residencia;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.service.ResidenciaService;
@@ -25,14 +26,14 @@ public class ResidenciaController {
 
     @GetMapping(URLs.RESIDENCIAS)
     @ResponseStatus(HttpStatus.OK)
-    public List<Residencia> listarTodos(){
-        return residenciaService.listarTodos();
+    public List<ResidenciaDTO> listarTodos(){
+        return residenciaService.listarTodosDTO();
     }
 
     @GetMapping(URLs.RESIDENCIA)
-    public ResponseEntity<Residencia> buscarPorId(@PathVariable Long residenciaId){
+    public ResponseEntity<ResidenciaDTO> buscarPorId(@PathVariable Long residenciaId){
         try {
-            return ResponseEntity.ok(residenciaService.buscarPorId(residenciaId));
+            return ResponseEntity.ok(residenciaService.buscarDTOPorId(residenciaId));
         } catch (RecursoNaoEncontradoException e) {
             return ResponseEntity.notFound().build();
         }
