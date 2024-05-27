@@ -1,61 +1,81 @@
-import javax.persistence.*;
-import java.sql.Timestamp;
+package br.com.fiap.collectage.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.Date;
 
 @Entity
-@Table(name = "T_COLETA")
-public class Coleta {
-
+@Table(name = "TBL_COLETA")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+public class Coleta implements DBEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cod_id")
-    private int id;
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_COLETA"
+    )
+    @SequenceGenerator(
+            name = "SEQ_COLETA",
+            sequenceName = "SEQ_COLETA",
+            allocationSize = 1
+    )
+    @Column(name = "COD_ID")
+    private Long id;
 
-    @Column(name = "dat_data_coleta")
-    private Timestamp dataColeta;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DAT_DATA_COLETA")
+    private Date data;
 
-    @Column(name = "txt_tipo_residuo")
-    private String tipoResiduo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TXT_TIPO_RESIDUO")
+    private TipoResiduo tipoResiduo;
 
-    @Column(name = "idn_concluida")
-    private int concluida;
+    @Column(name = "IDN_CONCLUIDA")
+    private boolean concluida;
 
-    // Getter para o id
-    public int getId() {
-        return id;
+    /* GETTERS and SETTERS */
+
+    @Override
+    public Long getId() {
+        return this.id;
     }
 
-    // Setter para o id
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    // Getter para a data de coleta
-    public Timestamp getDataColeta() {
-        return dataColeta;
+    public Date getData() {
+        return data;
     }
 
-    // Setter para a data de coleta
-    public void setDataColeta(Timestamp dataColeta) {
-        this.dataColeta = dataColeta;
+    public void setData(Date data) {
+        this.data = data;
     }
 
-    // Getter para o tipo de resíduo
-    public String getTipoResiduo() {
+    public TipoResiduo getTipoResiduo() {
         return tipoResiduo;
     }
 
-    // Setter para o tipo de resíduo
-    public void setTipoResiduo(String tipoResiduo) {
+    public void setTipoResiduo(TipoResiduo tipoResiduo) {
         this.tipoResiduo = tipoResiduo;
     }
 
-    // Getter para o status de conclusão
-    public int getConcluida() {
+    public boolean isConcluida() {
         return concluida;
     }
 
-    // Setter para o status de conclusão
-    public void setConcluida(int concluida) {
+    public void setConcluida(boolean concluida) {
         this.concluida = concluida;
+    }
+
+    public enum TipoResiduo {
+        RECICLAVEL,
+        ORGANICO;
+
+        TipoResiduo() {}
     }
 }

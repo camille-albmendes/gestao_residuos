@@ -1,17 +1,62 @@
 package br.com.fiap.collectage.controller.residencia;
 
 import br.com.fiap.collectage.controller.URLs;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import br.com.fiap.collectage.dto.ResidenciaCadastroDTO;
+import br.com.fiap.collectage.dto.ResidenciaExibicaoDTO;
+import br.com.fiap.collectage.model.Residencia;
+import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
+import br.com.fiap.collectage.service.ResidenciaService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(URLs.RESIDENCIA)
 public class ResidenciaController {
 
-    @GetMapping
-    public String helloWorld() {
-        return "Hello residencia";
+    @Autowired
+    private ResidenciaService residenciaService;
+
+    @PostMapping(URLs.RESIDENCIAS)
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResidenciaExibicaoDTO salvar(@Valid @RequestBody ResidenciaCadastroDTO residenciaCadastroDTO){
+        return residenciaService.salvar(residenciaCadastroDTO);
     }
 
+    @GetMapping(URLs.RESIDENCIAS)
+    @ResponseStatus(HttpStatus.OK)
+    public List<ResidenciaExibicaoDTO> listarTodos(){
+        return residenciaService.listarTodos();
+    }
+
+    @GetMapping(URLs.RESIDENCIA)
+    public ResponseEntity<ResidenciaExibicaoDTO> buscarPorId(@PathVariable Long residenciaId){
+        try {
+            return ResponseEntity.ok(residenciaService.buscarPorId(residenciaId));
+        } catch (RecursoNaoEncontradoException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping(URLs.RESIDENCIA)
+    public ResponseEntity<Void> excluir(@PathVariable Long residenciaId){
+        try {
+            residenciaService.excluir(residenciaId);
+            return ResponseEntity.ok().build();
+        } catch (RecursoNaoEncontradoException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping(URLs.RESIDENCIAS)
+    public ResponseEntity<Residencia> atualizar(@RequestBody Residencia residencia){
+        try {
+            return ResponseEntity.ok(residenciaService.atualizar(residencia));
+        } catch (RecursoNaoEncontradoException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

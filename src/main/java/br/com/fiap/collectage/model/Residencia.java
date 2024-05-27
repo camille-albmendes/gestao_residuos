@@ -1,48 +1,61 @@
-import javax.persistence.*;
+package br.com.fiap.collectage.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.Date;
 
 @Entity
-@Table(name = "T_RESIDENCIAS")
-public class Residencia {
+@Table(name = "TBL_RESIDENCIAS")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+public class Residencia implements DBEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cod_id")
-    private int id;
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_RESIDENCIAS"
+    )
+    @SequenceGenerator(
+            name = "SEQ_RESIDENCIAS",
+            sequenceName = "SEQ_RESIDENCIAS",
+            allocationSize = 1
+    )
+    @Column(name = "COD_ID")
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "cod_logradouro_id")
+    @JoinColumn(name = "COD_LOGRADOURO_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Logradouro logradouro;
 
-    @Column(name = "dat_data_ultima_coleta")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DAT_DATA_ULTIMA_COLETA")
     private Date dataUltimaColeta;
 
-    // Getter para o id
-    public int getId() {
-        return id;
+    @Override
+    public Long getId() {
+        return this.id;
     }
 
-    // Setter para o id
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    // Getter para o logradouro
     public Logradouro getLogradouro() {
         return logradouro;
     }
 
-    // Setter para o logradouro
     public void setLogradouro(Logradouro logradouro) {
         this.logradouro = logradouro;
     }
 
-    // Getter para a data da última coleta
     public Date getDataUltimaColeta() {
         return dataUltimaColeta;
     }
 
-    // Setter para a data da última coleta
     public void setDataUltimaColeta(Date dataUltimaColeta) {
         this.dataUltimaColeta = dataUltimaColeta;
     }
