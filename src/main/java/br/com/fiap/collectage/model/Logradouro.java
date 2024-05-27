@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "TBL_LOGRADOURO")
+@Table(name = "TBL_LOGRADOUROS")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,11 +15,11 @@ public class Logradouro implements DBEntity {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "SEQ_LOGRADOURO"
+            generator = "SEQ_LOGRADOUROS"
     )
     @SequenceGenerator(
-            name = "SEQ_LOGRADOURO",
-            sequenceName = "SEQ_LOGRADOURO",
+            name = "SEQ_LOGRADOUROS",
+            sequenceName = "SEQ_LOGRADOUROS",
             allocationSize = 1
     )
     @Column(name = "COD_ID")
