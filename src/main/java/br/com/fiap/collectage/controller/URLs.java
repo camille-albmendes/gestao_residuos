@@ -1,6 +1,9 @@
 package br.com.fiap.collectage.controller;
 
 public class URLs {
+    public static final String LOGIN = "/auth/login";
+    public static final String CADASTRAR_USUARIO = "/auth/cadastro";
+
     public static final String USUARIO = "/api/usuarios/{usuarioId}";
     public static final String USUARIOS = "/api/usuarios";
 

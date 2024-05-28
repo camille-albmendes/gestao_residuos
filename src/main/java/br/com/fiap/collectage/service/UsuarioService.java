@@ -8,6 +8,8 @@ import br.com.fiap.collectage.model.Usuario;
 import br.com.fiap.collectage.repository.RecursoNaoEncontradoException;
 import br.com.fiap.collectage.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +32,12 @@ public class UsuarioService extends AbstractCRUDService<Usuario> {
     }
 
     public UsuarioExibicaoDTO salvar(UsuarioCadastroDTO usuarioCadastroDTO){
+        String senhaCriptografada = new BCryptPasswordEncoder().encode(usuarioCadastroDTO.senha());
+
         Usuario usuario = new Usuario();
         BeanUtils.copyProperties(usuarioCadastroDTO, usuario);
+        usuario.setSenha(senhaCriptografada);
+
         return new UsuarioExibicaoDTO(super.salvarModel(usuario));
     }
 }
