@@ -7,13 +7,15 @@ import java.util.Date;
 public record ResidenciaExibicaoDTO(
     Long id,
     LogradouroExibicaoDTO logradouro,
-    Date dataUltimaColeta
+    Date dataUltimaColeta,
+    Integer capacidade
 ) {
     public ResidenciaExibicaoDTO(Residencia residencia) {
         this(
             residencia.getId(),
             new LogradouroExibicaoDTO(residencia.getLogradouro()),
-            residencia.getDataUltimaColeta()
+            residencia.getDataUltimaColeta(),
+            residencia.getCapacidade()
         );
     }
 }
