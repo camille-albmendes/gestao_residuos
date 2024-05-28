@@ -1,9 +1,12 @@
 package br.com.fiap.collectage.controller.auth;
 
+import br.com.fiap.collectage.config.security.TokenService;
 import br.com.fiap.collectage.controller.URLs;
+import br.com.fiap.collectage.dto.TokenDTO;
 import br.com.fiap.collectage.dto.UsuarioCadastroDTO;
 import br.com.fiap.collectage.dto.UsuarioExibicaoDTO;
 import br.com.fiap.collectage.dto.UsuarioLoginDTO;
+import br.com.fiap.collectage.model.Usuario;
 import br.com.fiap.collectage.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +30,11 @@ public class AuthController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping(URLs.LOGIN)
-    public ResponseEntity<Void> login(
+    public ResponseEntity<TokenDTO> login(
             @RequestBody
             @Valid
             UsuarioLoginDTO usuarioDto
@@ -41,11 +47,11 @@ public class AuthController {
 
         try {
             Authentication auth = this.authenticationManager.authenticate(usernamePassword);
+            String token = tokenService.gerarToken((Usuario) auth.getPrincipal());
+            return ResponseEntity.ok(new TokenDTO(token));
         } catch (AuthenticationException e) {
             return ResponseEntity.notFound().build();
         }
-
-        return ResponseEntity.ok().build();
     }
 
     @PostMapping(URLs.CADASTRAR_USUARIO)
